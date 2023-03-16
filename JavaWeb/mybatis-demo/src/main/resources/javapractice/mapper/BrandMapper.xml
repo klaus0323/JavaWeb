@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--根标签-->
+<mapper namespace="javapractice.mapper.BrandMapper">
+
+    <!--数据库表字段名称和实体类属性名称不一样，不能自动封装
+    * 起别名，每次查询都有要定义一次
+    * 还可以定义sql片段，但是不灵活
+    * RESULTMAP
+        定义<resultMap> 标签
+        用resultMap 替换resultType
+    -->
+
+    <!--    id is key-->
+    <!--    type: 映射的类型-->
+    <resultMap id="brandResultMap" type="javapractice.pojo.Brand">
+        <!--        id 是主键字-->
+        <!--        result是一般字段-->
+        <!--        column是列-->
+        <!--        property是class里面映射-->
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+<!--    主键反回
+usegeneratedkeys = true
+keyProperty = id
+-->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand (brand_name, company_name, ordered, description, status)
+        values (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status});
+    </insert>
+
+    <update id="update">
+        update tb_brand
+        <set>
+            <if test="brandName != null and brandName != ''">brand_name = #{brandName},</if>
+            <if test="companyName != null and companyName != ''">company_name = #{companyName},</if>
+            <if test="ordered != null">ordered = #{ordered},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+
+
+
+
+        </set>
+        where id = #{id};
+    </update>
+    <delete id="deleteByID">
+
+        delete from tb_brand where id = #{id}
+
+    </delete>
+    <delete id="deleteByIDs">
+        delete from tb_brand where id
+        in (
+            <foreach collection="ids" item = "id" separator=",">
+                #{id}
+            </foreach>);
+    </delete>
+
+    <select id="selectALL" resultMap="brandResultMap">
+
+        select * from tb_brand;
+    </select>
+    <select id="selectByID" resultMap="brandResultMap">
+        select * from tb_brand where id = #{id};
+
+    </select>
+
+    <!--    条件查询-->
+
+    <!--    <select id="selectByCondition" resultMap="brandResultMap">-->
+    <!--        select *-->
+    <!--        from tb_brand-->
+    <!--        where status = #{status}-->
+    <!--            and company_name like #{companyName}-->
+    <!--            and brand_name like #{brandName};-->
+
+    <!--    </select>-->
+    <!--    动态sql查询
+    * if:条件判断
+        test为逻辑表达式
+     * 问题：如果第一个条件不成立，第二个条件成为第一个，and会开头就报错
+     解决：
+        1. 加入恒等式1=1作为第一个条件
+        2. mybatis的<where>标签
+
+    -->
+
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        <where>
+        <if test="status != null">and status = #{status}</if>
+        <if test="companyName != null and companyName != ''">and company_name like #{companyName}</if>
+        <if test="brandName != null and brandName !=''">and brand_name like #{brandName}</if>
+        </where>
+    </select>
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        <where>
+            <choose> <!-- equals to switch-->
+                <when test="status != null"> status = #{status}</when>
+                <when test="companyName != null and companyName != ''">company_name like #{companyName</when>
+                <when test="brandName != null and brandName !=''">brand_name like #{brandName}</when>
+
+            </choose>
+        </where>
+    </select>
+
+</mapper>

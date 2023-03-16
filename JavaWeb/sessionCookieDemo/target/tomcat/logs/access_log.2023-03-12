@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [12/Mar/2023:11:05:59 -0700] "GET /sessionCookieDemo HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [12/Mar/2023:11:05:59 -0700] "GET /sessionCookieDemo/ HTTP/1.1" 200 52 http-bio-8080-exec-3 71
+0:0:0:0:0:0:0:1 - - [12/Mar/2023:11:06:00 -0700] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [12/Mar/2023:11:06:05 -0700] "GET /sessionCookieDemo/demo1 HTTP/1.1" 200 - http-bio-8080-exec-5 2
+0:0:0:0:0:0:0:1 - - [12/Mar/2023:11:06:08 -0700] "GET /sessionCookieDemo/demo2 HTTP/1.1" 200 - http-bio-8080-exec-6 1

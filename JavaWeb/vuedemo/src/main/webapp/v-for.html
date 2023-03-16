@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <div v-for="addr in addrs">
+        {{addr}} <br>
+    </div>
+
+    <div v-for="(addr, i) in addrs">
+        {{i+1}}--{{addr}} <br>
+    </div>
+
+</div>
+<script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el:"#app",
+        data(){
+            return {
+                username:"",
+                url:"https://google.com",
+                count:3,
+                addrs:["buttaby", "vagouver","cocolamb"]
+            }
+        },
+        methods:{
+            show(){
+                alert("嗷嗷噗噗噗");
+            }
+        }
+    })
+</script>
+</body>
+</html>

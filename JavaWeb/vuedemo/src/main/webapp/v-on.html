@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div v-if="count == 3">div3</div>
+    <div v-else-if="count==4">div4</div>
+    <div v-else-if="count==2">div2</div>
+    <div v-else>div100</div>
+
+    <div v-show="count==100">fffffffffffffff</div>
+    <br>
+
+    <input v-model="count">
+
+</div>
+<script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el:"#app",
+        data(){
+            return {
+                username:"",
+                url:"https://google.com",
+                count:3
+            }
+        },
+        methods:{
+            show(){
+                alert("嗷嗷噗噗噗");
+            }
+        }
+    })
+</script>
+</body>
+</html>
