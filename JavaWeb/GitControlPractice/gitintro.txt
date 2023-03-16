@@ -1,6 +1,8 @@
 Hello this is the git version control doc
 
 
+git not control practice by categg
+
 
 
 
