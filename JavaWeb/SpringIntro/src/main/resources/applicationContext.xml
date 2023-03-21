@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  1.   导入spring对应坐标-->
+
+    <!--  2.   配置对应的beans-->
+    <!--    bean 表示配置bean-->
+    <!--    id表示名字，class表示类型-->
+    <bean id="BookDaoImpl" class="dao.impl.BookDaoImpl"></bean>
+    <!--    name是bean的别名-->
+    <bean id="BookServiceImpl" name="service, beanService, bookEbi" class="service.impl.BookServiceImpl"
+          scope="prototype">
+        <!--        prototype指的是两个不同的地址，创造出来的bean不是单例-->
+
+        <!--        7. 配置service和dao关系， property标签表示当前bean的属性-->
+        <property name="bookDao" ref="BookDaoImpl"/>
+        <!-- name表示配置的是哪一个具体属性，ref对应的是参照哪一个bean       bookDao对应的是要传进来的class的名称，ref对应的是在xml里面的id-->
+        <!-- 建议还是用id引用-->
+
+    </bean>
+
+</beans>
